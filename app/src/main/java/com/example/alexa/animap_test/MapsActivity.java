@@ -1,6 +1,7 @@
 package com.example.alexa.animap_test;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -153,5 +154,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         /*LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
+    }
+
+    public void onBackPressed()
+    {
+        startActivity(new Intent(getApplicationContext(), Menu.class));
+
     }
 }
