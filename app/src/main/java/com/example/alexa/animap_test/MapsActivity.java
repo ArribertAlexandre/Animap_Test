@@ -3,6 +3,8 @@ package com.example.alexa.animap_test;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -11,6 +13,10 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,11 +31,20 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     LocationManager locationManager;
+    private TextView lat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        //Création du TextView
+        lat = (TextView) findViewById(R.id.tvlat);
+        //Desactivation du TextView
+        lat.setEnabled(false);
+        //Centrer le texte dans le TextView
+        lat.setGravity(Gravity.CENTER);
+        //Texte ecrit en noir
+        lat.setTextColor(Color.BLACK);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -51,6 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onLocationChanged(Location location) {
 
+
                         //Recupere la latitude
                         double latitude = location.getLatitude();
                         //Recupere la longitude
@@ -62,10 +78,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         try {
                             geocoder.getFromLocation(latitude, longitude, 1);
                             List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
+                            //Recupere le nom du pays
+                            String pays = addressList.get(0).getCountryName();
+                            //Recupere le nom de la ville
                             String str = addressList.get(0).getLocality() + ",";
                             str += addressList.get(0).getCountryName();
                             mMap.addMarker(new MarkerOptions().position(latLng).title(str));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                            lat.setText(pays);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
