@@ -28,7 +28,7 @@ public class Menu extends AppCompatActivity {
         api.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ContinentAPI.class));
+                startActivity(new Intent(getApplicationContext(), TestAPI.class));
                 finish();
             }
         });
