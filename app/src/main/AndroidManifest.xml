@@ -43,7 +43,9 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".ContinentAPI" />
-        <activity android:name=".TestAPI"></activity>
+        <activity android:name=".TestAPI" />
+        <activity android:name=".Test2" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
